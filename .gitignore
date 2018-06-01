@@ -1,0 +1,6 @@
+build/
+I2C2CAN/can/.dep/
+I2C2CAN/can/build/
+I2C2CAN/can/libcan.a
+backup
+*.swp

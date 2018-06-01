@@ -1,0 +1,348 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="14.0">
+  <PropertyGroup>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>7.0</ProjectVersion>
+    <ToolchainName>com.Atmel.AVRGCC8.C</ToolchainName>
+    <ProjectGuid>dce6c7e3-ee26-4d79-826b-08594b9ad897</ProjectGuid>
+    <avrdevice>ATmega16M1</avrdevice>
+    <avrdeviceseries>none</avrdeviceseries>
+    <OutputType>Executable</OutputType>
+    <Language>C</Language>
+    <OutputFileName>$(MSBuildProjectName)</OutputFileName>
+    <OutputFileExtension>.elf</OutputFileExtension>
+    <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
+    <AssemblyName>I2C2CAN</AssemblyName>
+    <Name>I2C2CAN</Name>
+    <RootNamespace>I2C2CAN</RootNamespace>
+    <ToolchainFlavour>Native</ToolchainFlavour>
+    <KeepTimersRunning>true</KeepTimersRunning>
+    <OverrideVtor>false</OverrideVtor>
+    <CacheFlash>true</CacheFlash>
+    <ProgFlashFromRam>true</ProgFlashFromRam>
+    <RamSnippetAddress>0x20000000</RamSnippetAddress>
+    <UncachedRange />
+    <preserveEEPROM>true</preserveEEPROM>
+    <OverrideVtorValue>exception_table</OverrideVtorValue>
+    <BootSegment>2</BootSegment>
+    <eraseonlaunchrule>0</eraseonlaunchrule>
+    <AsfFrameworkConfig>
+      <framework-data xmlns="">
+        <options />
+        <configurations />
+        <files />
+        <documentation help="" />
+        <offline-documentation help="" />
+        <dependencies>
+          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.34.2" />
+        </dependencies>
+      </framework-data>
+    </AsfFrameworkConfig>
+    <avrtool>custom</avrtool>
+    <avrtoolserialnumber />
+    <avrdeviceexpectedsignature>0x1E9484</avrdeviceexpectedsignature>
+    <custom>
+      <ToolOptions xmlns="">
+        <InterfaceProperties>
+        </InterfaceProperties>
+      </ToolOptions>
+      <ToolType xmlns="">custom</ToolType>
+      <ToolNumber xmlns="">
+      </ToolNumber>
+      <ToolName xmlns="">Custom Programming Tool</ToolName>
+    </custom>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <ToolchainSettings>
+      <AvrGcc>
+  <avrgcc.common.Device>-mmcu=atmega16m1 -B "%24(PackRepoDir)\atmel\ATmega_DFP\1.1.130\gcc\dev\atmega16m1"</avrgcc.common.Device>
+  <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
+  <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
+  <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
+  <avrgcc.common.outputfiles.srec>True</avrgcc.common.outputfiles.srec>
+  <avrgcc.common.outputfiles.usersignatures>False</avrgcc.common.outputfiles.usersignatures>
+  <avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>
+  <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
+  <avrgcc.compiler.symbols.DefSymbols>
+    <ListValues>
+      <Value>NDEBUG</Value>
+    </ListValues>
+  </avrgcc.compiler.symbols.DefSymbols>
+  <avrgcc.compiler.directories.IncludePaths>
+    <ListValues>
+      <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.1.130\include</Value>
+    </ListValues>
+  </avrgcc.compiler.directories.IncludePaths>
+  <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
+  <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
+  <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
+  <avrgcc.compiler.warnings.AllWarnings>True</avrgcc.compiler.warnings.AllWarnings>
+  <avrgcc.linker.libraries.Libraries>
+    <ListValues>
+      <Value>libm</Value>
+      <Value>i2c.c</Value>
+      <Value>i2c.h</Value>
+      <Value>at90can.c</Value>
+      <Value>at90can_buffer.c</Value>
+      <Value>at90can_disable_dyn_filter.c</Value>
+      <Value>at90can_error_register.c</Value>
+      <Value>at90can_get_buf_message.c</Value>
+      <Value>at90can_get_dyn_filter.c</Value>
+      <Value>at90can_get_message.c</Value>
+      <Value>at90can_private.h</Value>
+      <Value>at90can_send_buf_message.c</Value>
+      <Value>at90can_send_message.c</Value>
+      <Value>at90can_set_dyn_filter.c</Value>
+      <Value>at90can_set_mode.c</Value>
+      <Value>can.h</Value>
+      <Value>can_buffer.c</Value>
+      <Value>can_buffer.h</Value>
+      <Value>can_private.h</Value>
+      <Value>config.h</Value>
+      <Value>doxyfile</Value>
+      <Value>Makefile</Value>
+      <Value>mcp2515.c</Value>
+      <Value>mcp2515_buffer.c</Value>
+      <Value>mcp2515_defs.h</Value>
+      <Value>mcp2515_error_register.c</Value>
+      <Value>mcp2515_get_dyn_filter.c</Value>
+      <Value>mcp2515_get_message.c</Value>
+      <Value>mcp2515_private.h</Value>
+      <Value>mcp2515_read_id.c</Value>
+      <Value>mcp2515_regdump.c</Value>
+      <Value>mcp2515_send_message.c</Value>
+      <Value>mcp2515_set_dyn_filter.c</Value>
+      <Value>mcp2515_set_mode.c</Value>
+      <Value>mcp2515_sleep.c</Value>
+      <Value>mcp2515_static_filter.c</Value>
+      <Value>mcp2515_write_id.c</Value>
+      <Value>sja1000.c</Value>
+      <Value>sja1000_buffer.c</Value>
+      <Value>sja1000_defs.h</Value>
+      <Value>sja1000_error_register.c</Value>
+      <Value>sja1000_get_message.c</Value>
+      <Value>sja1000_private.h</Value>
+      <Value>sja1000_send_message.c</Value>
+      <Value>sja1000_set_mode.c</Value>
+      <Value>spi.c</Value>
+      <Value>spi.h</Value>
+      <Value>utils.h</Value>
+      <Value>timer.c</Value>
+      <Value>timer.h</Value>
+    </ListValues>
+  </avrgcc.linker.libraries.Libraries>
+  <avrgcc.linker.libraries.LibrarySearchPaths>
+    <ListValues>
+      <Value>C:\Users\mewla\Google Drive\Microcontroller\I2C2CAN\I2C2CAN\i2c</Value>
+      <Value>C:\Users\mewla\Google Drive\Microcontroller\I2C2CAN\I2C2CAN\can</Value>
+      <Value>C:\Users\mewla\Google Drive\Microcontroller\I2C2CAN\I2C2CAN</Value>
+    </ListValues>
+  </avrgcc.linker.libraries.LibrarySearchPaths>
+  <avrgcc.assembler.general.IncludePaths>
+    <ListValues>
+      <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.1.130\include</Value>
+    </ListValues>
+  </avrgcc.assembler.general.IncludePaths>
+</AvrGcc>
+    </ToolchainSettings>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <ToolchainSettings>
+      <AvrGcc>
+  <avrgcc.common.Device>-mmcu=atmega16m1 -B "%24(PackRepoDir)\atmel\ATmega_DFP\1.1.130\gcc\dev\atmega16m1"</avrgcc.common.Device>
+  <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
+  <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
+  <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
+  <avrgcc.common.outputfiles.srec>True</avrgcc.common.outputfiles.srec>
+  <avrgcc.common.outputfiles.usersignatures>False</avrgcc.common.outputfiles.usersignatures>
+  <avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>
+  <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
+  <avrgcc.compiler.symbols.DefSymbols>
+    <ListValues>
+      <Value>DEBUG</Value>
+      <Value>F_CPU=16000000UL</Value>
+    </ListValues>
+  </avrgcc.compiler.symbols.DefSymbols>
+  <avrgcc.compiler.directories.IncludePaths>
+    <ListValues>
+      <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.1.130\include</Value>
+    </ListValues>
+  </avrgcc.compiler.directories.IncludePaths>
+  <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
+  <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
+  <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
+  <avrgcc.compiler.optimization.DebugLevel>Default (-g2)</avrgcc.compiler.optimization.DebugLevel>
+  <avrgcc.compiler.warnings.AllWarnings>True</avrgcc.compiler.warnings.AllWarnings>
+  <avrgcc.compiler.warnings.ExtraWarnings>True</avrgcc.compiler.warnings.ExtraWarnings>
+  <avrgcc.compiler.warnings.Undefined>True</avrgcc.compiler.warnings.Undefined>
+  <avrgcc.compiler.warnings.Pedantic>True</avrgcc.compiler.warnings.Pedantic>
+  <avrgcc.compiler.miscellaneous.OtherFlags>-std=gnu99 -Wattributes</avrgcc.compiler.miscellaneous.OtherFlags>
+  <avrgcc.assembler.general.IncludePaths>
+    <ListValues>
+      <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.1.130\include</Value>
+    </ListValues>
+  </avrgcc.assembler.general.IncludePaths>
+  <avrgcc.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcc.assembler.debugging.DebugLevel>
+</AvrGcc>
+    </ToolchainSettings>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="can\at90can.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\at90can_buffer.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\at90can_disable_dyn_filter.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\at90can_error_register.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\at90can_get_buf_message.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\at90can_get_dyn_filter.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\at90can_get_message.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\at90can_private.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\at90can_send_buf_message.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\at90can_send_message.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\at90can_set_dyn_filter.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\at90can_set_mode.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\can.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\can_buffer.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\can_buffer.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\can_private.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\config.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\mcp2515.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\mcp2515_buffer.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\mcp2515_defs.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\mcp2515_error_register.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\mcp2515_get_dyn_filter.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\mcp2515_get_message.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\mcp2515_private.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\mcp2515_read_id.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\mcp2515_regdump.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\mcp2515_send_message.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\mcp2515_set_dyn_filter.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\mcp2515_set_mode.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\mcp2515_sleep.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\mcp2515_static_filter.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\mcp2515_write_id.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\sja1000.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\sja1000_buffer.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\sja1000_defs.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\sja1000_error_register.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\sja1000_get_message.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\sja1000_private.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\sja1000_send_message.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\sja1000_set_mode.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\spi.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\spi.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="can\utils.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="i2c\i2c.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="i2c\i2c.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="main.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="timer.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="timer.h">
+      <SubType>compile</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="can\" />
+    <Folder Include="i2c\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="can\doxyfile">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="can\Makefile">
+      <SubType>compile</SubType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
+</Project>
