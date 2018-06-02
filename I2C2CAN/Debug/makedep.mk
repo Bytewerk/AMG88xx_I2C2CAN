@@ -66,7 +66,7 @@ can\sja1000_set_mode.c
 
 can\spi.c
 
-i2c\i2c.c
+i2c.c
 
 main.c
 

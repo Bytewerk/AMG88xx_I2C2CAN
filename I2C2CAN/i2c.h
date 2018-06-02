@@ -64,6 +64,9 @@ void i2c_start();
 void i2c_stop();
 uint8_t i2c_write(uint8_t data);
 
+uint8_t i2c_readRegister(uint8_t slaveid, uint8_t registerAdress);
+void i2c_writeRegister(uint8_t slaveid, uint8_t registerAdress, uint8_t value);
+
 // Lesefunktion
 // 0 = Letztes Byte, sende NAK
 // 1 = Es kommen noch welche, sende ACK

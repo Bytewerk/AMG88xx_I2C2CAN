@@ -1,11 +1,14 @@
-LeuchtSchild
+AMG88xx_I2C2CAN
+
 ==========
 
-This makes our Sign glow in pretty colors.
-It uses the atmega64m1 to talk to a led strip and CAN bus to receive commands.
+
+Reads the AMG88xx in 10fps via soft I2C on an atmega64m1 and send the data on CAN bus.
+
 
 To build this type "make" and "make flash" to flash the micro controller using avrdude
 
+.
+
 Maintainer
-	Daniel Steuer <daniel.steuer@bingo-ev.de>
-	
+	Dennis Laue <mewlaue@web.de>

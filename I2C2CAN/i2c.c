@@ -119,3 +119,25 @@ uint8_t i2c_read(uint8_t ack)
 
 	return data;
 }
+
+void i2c_writeRegister(uint8_t slaveid, uint8_t registerAdress, uint8_t data)
+{
+    i2c_start();
+    i2c_write(slaveid<<1);
+    i2c_write(registerAdress);
+    i2c_write(data);
+    i2c_stop();
+}
+
+uint8_t i2c_readRegister(uint8_t slaveid, uint8_t registerAdress)
+{
+    uint8_t data=0;
+    i2c_start();
+    i2c_write(slaveid<<1);
+    i2c_write(registerAdress);
+    i2c_start(); //repeated start
+    i2c_write((slaveid<<1)+1); //1 for read mode
+    data=i2c_read(NAK);
+    i2c_stop();
+    return data;
+}
