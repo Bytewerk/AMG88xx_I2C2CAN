@@ -69,7 +69,7 @@ int main( void )
 			DDRC  |= (1<<PC6); //debug blink
 			PORTC ^= (1<<PC6);
 
-			for(uint8_t canMessageCounter=0; canMessageCounter<7; canMessageCounter++)
+			for(uint8_t canMessageCounter=0; canMessageCounter<8; canMessageCounter++)
 			{
 				//generate the packet id
 				msg_tx.id = canStartID+canMessageCounter;
