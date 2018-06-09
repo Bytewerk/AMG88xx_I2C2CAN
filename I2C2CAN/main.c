@@ -40,7 +40,7 @@ int main( void )
 	uint8_t sensor=0x69;
 	//sensor
 	uint8_t data[64][2];
-	uint16_t *value=&data;
+	//uint16_t *value=&data;
 
 	//init
 	timer_init( );
@@ -77,7 +77,8 @@ int main( void )
 				//fill the packet with data
 				for(uint8_t canDataCounter=0; canDataCounter<CAN_MSG_MAX_LENGTH; canDataCounter++)
 				{
-					msg_tx.data[canDataCounter] = ((uint8_t)((value[canMessageCounter*8+canDataCounter])<<0)); //convert the signed 12bit to unsigned 8bit, just watching at the lower 8 bit (<<0). This is a range of 64°C.
+					//msg_tx.data[canDataCounter] = ((uint8_t)((value[canMessageCounter*8+canDataCounter])<<0)); //convert the signed 12bit to unsigned 8bit, just watching at the lower 8 bit (<<0). This is a range of 64°C.
+					msg_tx.data[canDataCounter] = data[canMessageCounter*8+canDataCounter][0];
 				}
                 //and send them over can
 				can_send_message( &msg_tx );
