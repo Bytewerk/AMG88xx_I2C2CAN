@@ -85,6 +85,7 @@ int main( void )
 
 				DDRC  |= (1<<PC5);//debug blink
 				PORTC ^= (1<<PC5);
+				_delay_ms(1);
 			}
 		}
 	}
