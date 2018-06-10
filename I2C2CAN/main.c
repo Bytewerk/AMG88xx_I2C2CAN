@@ -24,13 +24,23 @@
 
 #define CAN_MSG_MAX_LENGTH 8
 
+
+
+enum canMsgIds {
+	eCanImgDataBaseId = 0x0100, // + 0x0000 to 0x0007
+	eCanHeartbeatId   = 0x0108,
+	eCanResetId       = 0x0109
+}
+
+
+
 int my_can_init(void);
 
 int main( void )
 {
 	//can
-	can_t msg_tx;
-	uint16_t canStartID = 0x100;
+	can_t msg_tx, msg_heartbeat, msg_rx;
+	uint16_t canStartID = eCanImgDataBaseId;
 	msg_tx.flags.extended = 0;
 	msg_tx.flags.rtr = 0;
 	msg_tx.length = CAN_MSG_MAX_LENGTH;
@@ -47,13 +57,20 @@ int main( void )
 	my_can_init( );
 	i2c_init();
 	sei( );
-	wdt_enable(WDTO_500MS);
+	wdt_enable(WDTO_250MS);
 	wdt_reset();
 
 	while( 1 )
 	{
 		wdt_reset();
 		now = timer_getMs( );
+
+		while( can_check_message() ) {
+			can_get_message( &msg_rx );
+			if( msg_rx.id == eCanResetId ) {
+				while( 1 ); // wait for watchdog reset
+			}
+		}
 
 		//every 100ms
 		if( t_read_pixels + 100 < now)
