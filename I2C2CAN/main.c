@@ -22,8 +22,11 @@
 #include "timer.h"
 #include "i2c.h"
 
-#define CAN_MSG_MAX_LENGTH 8
+#define CAN_MSG_MAX_LENGTH (8)
 
+#define HW_SERIALNUM      (3)    // 0 - 3
+#define SW_VERSION_MAJOR  (0x01) // <minor(8)>
+#define SW_VERSION_MINOR  (0x02) // <major(8)>
 
 
 enum canMsgIds {
@@ -32,20 +35,44 @@ enum canMsgIds {
 	eCanResetId       = 0x0109
 }
 
+enum canMsgIds {
+	eCanImgDataBaseId = 0x0100 | (HW_SERIALNUM<<4), // + 0x0000 to 0x0007
+	eCanHeartbeatId   = 0x0108 | (HW_SERIALNUM<<4) ,
+	eCanResetId       = 0x0109 | (HW_SERIALNUM<<4)
+};
+enum delays {
+	eImgDataDelay   = 100,  // ms
+	eHeartbeatDelay = 1000  // ms
+};
 
 
 int my_can_init(void);
 
+
+
 int main( void )
 {
 	//can
-	can_t msg_tx, msg_heartbeat, msg_rx;
+	can_t msg_img, msg_heartbeat, msg_rx;
 	uint16_t canStartID = eCanImgDataBaseId;
-	msg_tx.flags.extended = 0;
-	msg_tx.flags.rtr = 0;
-	msg_tx.length = CAN_MSG_MAX_LENGTH;
+	msg_img.length = CAN_MSG_MAX_LENGTH;
+	msg_img.flags.rtr = 0;
+	msg_img.flags.extended = 0;
+
+	msg_heartbeat.id = eCanHeartbeatId;
+	msg_heartbeat.length = 2;
+	msg_heartbeat.flags.rtr = 0;
+	msg_heartbeat.flags.extended = 0;
+	msg_heartbeat.data[0] = (SW_VERSION_MAJOR) & 0xFF;
+	msg_heartbeat.data[1] = (SW_VERSION_MINOR) & 0xFF;
+
+
+
+
 	//timer
 	uint32_t now, t_read_pixels=0;
+	uint32_t t_send_heartbeat = 0;
+
 	//i2c
 	uint8_t sensor=0x69;
 	//sensor
@@ -73,8 +100,11 @@ int main( void )
 		}
 
 		//every 100ms
-		if( t_read_pixels + 100 < now)
+		if( t_read_pixels + eImgDataDelay < now)
 		{
+			DDRC  |= (1<<PC6); // blue LED
+			PORTC ^= (1<<PC6);
+
 			t_read_pixels = now;
 			//read data from the I2C Sensor
 			for(uint8_t pixelCounter=0; pixelCounter<=63; pixelCounter++)
@@ -83,28 +113,32 @@ int main( void )
 				data[pixelCounter][1]=i2c_readRegister(sensor, 0x81+(pixelCounter<<1)); //high
 			}
 
-			DDRC  |= (1<<PC6); //debug blink
-			PORTC ^= (1<<PC6);
 
 			for(uint8_t canMessageCounter=0; canMessageCounter<8; canMessageCounter++)
 			{
 				//generate the packet id
-				msg_tx.id = canStartID+canMessageCounter;
+				msg_img.id = canStartID+canMessageCounter;
 
 				//fill the packet with data
 				for(uint8_t canDataCounter=0; canDataCounter<CAN_MSG_MAX_LENGTH; canDataCounter++)
 				{
-					//msg_tx.data[canDataCounter] = ((uint8_t)((value[canMessageCounter*8+canDataCounter])<<0)); //convert the signed 12bit to unsigned 8bit, just watching at the lower 8 bit (<<0). This is a range of 64°C.
-					msg_tx.data[canDataCounter] = data[canMessageCounter*8+canDataCounter][0];
+					//msg_img.data[canDataCounter] = ((uint8_t)((value[canMessageCounter*8+canDataCounter])<<0)); //convert the signed 12bit to unsigned 8bit, just watching at the lower 8 bit (<<0). This is a range of 64°C.
+					msg_img.data[canDataCounter] = data[canMessageCounter*8+canDataCounter][0];
 				}
                 //and send them over can
-				can_send_message( &msg_tx );
+				can_send_message( &msg_img );
 
-				DDRC  |= (1<<PC5);//debug blink
-				PORTC ^= (1<<PC5);
 				_delay_ms(1);
 			}
 		}
+
+		if( t_send_heartbeat + eHeartbeatDelay < now ) {
+			DDRC  |= (1<<PC5); // green LED
+			PORTC ^= (1<<PC5);
+			t_send_heartbeat = now;
+			can_send_message( &msg_heartbeat );
+		}
+
 	}
 	return 0;
 }
