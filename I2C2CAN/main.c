@@ -26,8 +26,8 @@
 #define CAN_MSG_MAX_LENGTH (8)
 
 #define HW_SERIALNUM      (3)    // 0 - 3
-#define SW_VERSION_MAJOR  (0x01) // <minor(8)>
-#define SW_VERSION_MINOR  (0x03) // <major(8)>
+#define SW_VERSION_MAJOR  (0x03) // <minor(8)>
+#define SW_VERSION_MINOR  (0x01) // <major(8)>
 
 
 
