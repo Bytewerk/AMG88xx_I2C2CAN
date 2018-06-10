@@ -99,7 +99,7 @@ int main( void )
 		if( t_read_pixels + eImgDataDelay < now)
 		{
 			DDRC  |= (1<<PC6); // blue LED
-			PORTC ^= (1<<PC6);
+			PORTC |= (1<<PC6);
 
 			t_read_pixels = now;
 			//read data from the I2C Sensor
@@ -110,6 +110,7 @@ int main( void )
 			}
 
 
+			PORTC &= ~(1<<PC6);
 			for(uint8_t canMessageCounter=0; canMessageCounter<8; canMessageCounter++)
 			{
 				//generate the packet id
@@ -125,6 +126,7 @@ int main( void )
 
 				_delay_ms(1);
 			}
+
 		}
 
 		if( t_send_heartbeat + eHeartbeatDelay < now ) {
