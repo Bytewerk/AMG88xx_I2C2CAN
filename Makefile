@@ -77,8 +77,8 @@ clean:
 #####
 # Flash
 flash:
-	@$(AVRDUDE) -B 0.1 -p $(AVRDUDEARCH) -c $(AVRDUDEPROG) -F -P usb -U flash:w:"$(BR)/$(BINARY).hex":i
-
+#	@$(AVRDUDE) -B 0.1 -p $(AVRDUDEARCH) -c $(AVRDUDEPROG) -F -P usb -U flash:w:"$(BR)/$(BINARY).hex":i
+	avrdude -B 0.1 -v -c usbtiny -p m16m1 -U flash:w:"$(BR)/$(BINARY).hex":i
 
 
 #####
