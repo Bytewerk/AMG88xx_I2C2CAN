@@ -18,6 +18,7 @@
 #include <util/twi.h>
 #include <avr/wdt.h>
 #include <avr/interrupt.h>
+
 #include "can/can.h"
 #include "timer.h"
 #include "i2c.h"
@@ -26,14 +27,9 @@
 
 #define HW_SERIALNUM      (3)    // 0 - 3
 #define SW_VERSION_MAJOR  (0x01) // <minor(8)>
-#define SW_VERSION_MINOR  (0x02) // <major(8)>
+#define SW_VERSION_MINOR  (0x03) // <major(8)>
 
 
-enum canMsgIds {
-	eCanImgDataBaseId = 0x0100, // + 0x0000 to 0x0007
-	eCanHeartbeatId   = 0x0108,
-	eCanResetId       = 0x0109
-}
 
 enum canMsgIds {
 	eCanImgDataBaseId = 0x0100 | (HW_SERIALNUM<<4), // + 0x0000 to 0x0007
@@ -122,7 +118,6 @@ int main( void )
 				//fill the packet with data
 				for(uint8_t canDataCounter=0; canDataCounter<CAN_MSG_MAX_LENGTH; canDataCounter++)
 				{
-					//msg_img.data[canDataCounter] = ((uint8_t)((value[canMessageCounter*8+canDataCounter])<<0)); //convert the signed 12bit to unsigned 8bit, just watching at the lower 8 bit (<<0). This is a range of 64°C.
 					msg_img.data[canDataCounter] = data[canMessageCounter*8+canDataCounter][0];
 				}
                 //and send them over can
