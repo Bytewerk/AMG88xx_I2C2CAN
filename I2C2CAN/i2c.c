@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include "i2c.h"
+#include "timer.h"
 
 void i2c_init()
 {
@@ -34,6 +35,7 @@ uint8_t i2c_write(uint8_t data)
 {
 
 	 uint8_t i;
+	 uint32_t now = timer_getMs();
 
 	 for(i=0;i<8;i++)
 	 {
@@ -50,7 +52,11 @@ uint8_t i2c_write(uint8_t data)
 		SOFT_I2C_SCL_HIGH;
 		H_DEL;
 
-		while((SCLPIN & (1<<SCL)) == 0 );	// Hier kann er sich aufhaengen, wenn Slave tot !!!
+		while((SCLPIN & (1<<SCL)) == 0 ){
+			if(timer_getMs() - now > 500){		// TODO: test this if timeout works
+				break;
+			}
+		}									
 
 		data=data<<1;
 	}
